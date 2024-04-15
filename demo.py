@@ -46,7 +46,7 @@ def loocv_mse(X, y, penalty = None):
     return np.mean([loocv_residual(i)**2 for i in range(len(y))])
 
 if __name__ == '__main__':
-    fig, ax = plt.subplots(5,2, sharex=True, sharey=True)
+    fig, ax = plt.subplots(5,2, sharex=True)
     fig.suptitle('MSE from LOOCV')
 
     chunks = [slice(30*i,30*(i+1)) for i in range(len(y)//30)]
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         ridge = [np.mean([loocv_mse(*one_hot(key, idx), strength*ridge_penalty) for idx in chunks]) for strength in tqdm.tqdm(penalty_strengths)]
         f.plot(penalty_strengths, ridge, label='Ridge')
 
-        for lengthscale in (0.5,0.75,1):
+        for lengthscale in (0.5,0.6,0.7,0.8,0.9,1):
             print(f'Off-diagonal Penalty, {lengthscale=}')
             offdiagonal_penalty = np.array([[np.exp(-((x1-x2)**2+(y1-y2)**2)/lengthscale**2) for x1 in range(8) for y1 in range(8)] for x2 in range(8) for y2 in range(8)])
             offdiagonal = [np.mean([loocv_mse(*one_hot(key, idx), strength*offdiagonal_penalty) for idx in chunks]) for strength in tqdm.tqdm(penalty_strengths)]
