@@ -11,6 +11,7 @@ In this repo, I present an example of this modified procedure, regressing a one-
 I present average-case LOOCV MSE across 174 multiple non-overlapping samples, each of size 30 (containing 3 instances of each class), for the following estimators:
 1. $\beta=(\frac{1}{n-1}X^TX+\lambda I)(\frac{1}{n-1}X^Ty)$
 2. $\beta=(\frac{1}{n-1}X^TX+\lambda M)(\frac{1}{n-1}X^Ty)$
+
 In these formulas:
 - $X$ is the feature matrix
 - $y$ is the target vector
@@ -19,3 +20,14 @@ In these formulas:
 - $M$ is a $64\times 64$ square matrix (indexed by points in the image), with $M_{i,j} = \exp\left(-\left(\frac{d(i,j)}{\text{lengthscale}}\right)^2\right)$, where $d(i,j)$ is the distance between two points in the image
 
 $X$ and $y$ are standardised so that within each chunk, every variable is mean-zero and has unit variance (or is constant zero). This eliminates the need to consider an intercept term, as well as any concerns about excessively penalising low-variance, high-signal predictors.
+
+Results by digit are shown below. Digits for which the second estimator outperforms (in some cases) are:
+- 1
+- 3
+- 4 (for very small regularisation penalty)
+- 8
+- 9
+
+![Results](https://github.com/odenpetersen/offdiagonal-ridge/raw/main/output/mse_loocv.png)
+
+A lengthscale approaching zero will have the same behaviour as ridge regularisation, but these results suggest that lengthscales slightly above zero may outperform ridge regularisation depending on the strength of the penalty.
