@@ -46,7 +46,7 @@ def loocv_mse(X, y, penalty = None):
     return np.mean([loocv_residual(i)**2 for i in range(len(y))])
 
 if __name__ == '__main__':
-    fig, ax = plt.subplots(5,2, sharex=True)
+    fig, ax = plt.subplots(5,2, sharex=True, sharey=False)
     fig.suptitle('MSE from LOOCV')
 
     chunks = [slice(30*i,30*(i+1)) for i in range(len(y)//30)]
