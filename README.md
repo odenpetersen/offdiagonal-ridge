@@ -31,3 +31,6 @@ Results by digit are shown below. Digits for which the second estimator outperfo
 ![Results](https://github.com/odenpetersen/offdiagonal-ridge/raw/main/output/mse_loocv.png)
 
 A lengthscale approaching zero will have the same behaviour as ridge regularisation, but these results suggest that lengthscales slightly above zero may outperform ridge regularisation depending on the strength of the penalty.
+
+This is what the empirical covariance matrix of the pixels looks like (in the particular one-dimensional order I've arranged them), vs. the penalty matrix added for regularisation.
+![Empirical Covariance vs. Penalty](https://github.com/odenpetersen/offdiagonal-ridge/raw/main/output/matrices.png)

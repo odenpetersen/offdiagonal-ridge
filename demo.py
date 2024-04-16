@@ -46,6 +46,7 @@ def loocv_mse(X, y, penalty = None):
     return np.mean([loocv_residual(i)**2 for i in range(len(y))])
 
 if __name__ == '__main__':
+    print('Results')
     fig, ax = plt.subplots(5,2, sharex=True, sharey=False)
     fig.suptitle('MSE from LOOCV')
 
@@ -83,3 +84,19 @@ if __name__ == '__main__':
 
     fig.set_size_inches(20, 20)
     fig.savefig('output/mse_loocv.png')
+
+
+    print('Empirical Covariance vs. Penalty')
+    fig, ax = plt.subplots(7,1)
+    M = np.cov(X.T)
+    ax[0].imshow(M)
+    ax[0].set_title('Empirical Covariance')
+
+    for i,lengthscale in enumerate((0.5,0.6,0.7,0.8,0.9,1)):
+        print(f'Off-diagonal Penalty, {lengthscale=}')
+        offdiagonal_penalty = np.array([[np.exp(-((x1-x2)**2+(y1-y2)**2)/lengthscale**2) for x1 in range(8) for y1 in range(8)] for x2 in range(8) for y2 in range(8)])
+        ax[i+1].imshow(offdiagonal_penalty)
+        ax[i+1].set_title(f'Penalty Matrix ({lengthscale=})')
+
+    fig.set_size_inches(5,20)
+    fig.savefig('output/matrices.png')
