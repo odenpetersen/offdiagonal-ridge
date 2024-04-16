@@ -6,7 +6,7 @@ Standard ridge regularisation is mathematically equivalent to the following proc
 
 In practice, we are sometimes faced with datasets where certain variables will clearly be correlated with nearby variables. It might therefore make sense to link the noise with a kernel function describing the correlation of the noise added to different variables.
 
-In this repo, I present an example of this modified procedure, regressing a one-hot encoded MNIST class label against the pixels in the corresponding images.
+In this repo, I present an example of this modified procedure. For a hand-written digit dataset (`sklearn.datasets.load_digits`), I regress a one-hot encoded class label against the pixels in the corresponding images.
 
 I present average-case LOOCV MSE across 174 multiple non-overlapping samples, each of size 30 (containing 3 instances of each class), for the following estimators:
 1. $\beta=(\frac{1}{n-1}X^TX+\lambda I)(\frac{1}{n-1}X^Ty)$
